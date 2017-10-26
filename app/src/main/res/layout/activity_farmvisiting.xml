@@ -1,0 +1,163 @@
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_centerInParent="true"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    tools:context="com.example.hp.trcarbsvisiting.farmvisiting"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="4dp"
+        android:text="Visitor Information:"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Full Name"
+            android:textSize="15dp"
+            android:id="@+id/name"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+
+        <TextView
+            android:id="@+id/txtdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="Select Date Of Birth"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Phone Number                  "
+            android:textSize="15dp"
+            android:id="@+id/phone_1"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Email Address"
+            android:textSize="15dp"
+            android:id="@+id/email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Pan Number"
+            android:textSize="15dp"
+            android:id="@+id/pan"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Adhaar Number"
+        android:textSize="15dp"
+        android:id="@+id/adhaar"
+        android:inputType="number"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:maxLength="12"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Street Address"
+            android:textSize="15dp"
+            android:id="@+id/street_address1"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="City                    "
+            android:textSize="15dp"
+            android:id="@+id/city1"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter zipcode                   "
+            android:textSize="15dp"
+            android:id="@+id/zipcode"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/state1"
+            android:entries="@array/spinner_stateslist"
+
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined">
+        </Spinner>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Country                    "
+            android:textSize="15dp"
+            android:id="@+id/country"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/occupation"
+            android:entries="@array/occupation"
+
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined">
+        </Spinner>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/bt_submitform"
+            android:text="NEXT"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:background="@drawable/bt_submit2"
+            android:layout_marginBottom="55dp"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+
+    </ScrollView>

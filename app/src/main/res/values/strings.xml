@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Select Type</string>
+    <string-array name="occupation">
+        <item>Select Occupation</item>
+        <item>Student</item>
+        <item>Agri Farmer </item>
+        <item>Aqua Farmer </item>
+        <item>Pvt. Employee </item>
+        <item>Business </item>
+        <item>Govt Official</item>
+
+    </string-array>
+
+
+    <string name="tv_declaration">
+    I hereby requesting, Aqua Farms to contact me on Aqua Culture requrements and I\'m interested to become a member in Andhra Crab Farmers Association for the the welfare of
+    of Mud Crab Farmers in Andhra Pradesh region.
+</string>
+
+
+    <string-array name="spinner_stateslist">
+        <item>Select State</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chhattisgarh</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Odisha</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Telangana</item>
+        <item>Tripura</item>
+        <item>Uttar Pradesh</item>
+        <item>Uttarakhand</item>
+        <item>West Bengal</item>
+    </string-array>
+</resources>

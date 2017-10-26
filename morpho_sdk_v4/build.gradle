@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('morpho_sdk_v4.aar'))
