@@ -6,13 +6,19 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,26 +46,83 @@ import static in.quagga.sdk.utils.EnumRequestType.OTP_AUTH;
 import static in.quagga.sdk.utils.EnumRequestType.OTP_EKYC;
 
 public class farmvisiting extends AppCompatActivity {
-TextView date;
+TextView date,v_date,v_enddate;
     public static final String REQUEST_METHOD = "POST";
     public static final int READ_TIMEOUT = 30000;
     public static final int CONNECTION_TIMEOUT = 30000;
     TextView response;
     String requestType;
     String id;
-
+Boolean vtype=false,etype=false;
     JSONObject obj,visit;
     String trc;
     Button b;
     Spinner state,occupation;
     EditText adh,name,phone,email,pan,street,city,zip,country;
     Intent gatewayIntent;
+    RadioGroup rg;
+    RadioButton vt,st;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmvisiting);
         visit=new JSONObject();
+        rg=(RadioGroup) findViewById(R.id.visit_type);
+
+        vt=(RadioButton) findViewById(R.id.visit);
+        st=(RadioButton) findViewById(R.id.stay);
         date=(TextView)findViewById(R.id.txtdate);
+        v_date=(TextView)findViewById(R.id.v_visit);
+        v_enddate=(TextView) findViewById(R.id.v_end);
+        v_date.setVisibility(TextView.INVISIBLE);
+        v_enddate.setVisibility(TextView.INVISIBLE);
+
+        v_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DateDialog dialog=new DateDialog(v);
+                FragmentTransaction ft =getFragmentManager().beginTransaction();
+                dialog.show(ft, "DatePicker");
+            }
+        });
+        v_enddate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DateDialog dialog=new DateDialog(v);
+                FragmentTransaction ft =getFragmentManager().beginTransaction();
+                dialog.show(ft, "DatePicker");
+            }
+        });
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                switch (checkedId) {
+                    case R.id.visit:
+                    //  System.out.println("visit");
+                        v_date.setHint("Enter Visit Date");
+                        v_date.setVisibility(TextView.VISIBLE);
+                        v_enddate.setVisibility(TextView.INVISIBLE);
+                        etype=false;
+                        vtype=true;
+                        break;
+                    case R.id.stay:
+                        vtype=false;
+                        etype=true;
+                        v_date.setHint("Enter Start Date");
+                        v_date.setVisibility(TextView.VISIBLE);
+                        v_enddate.setHint("Enter End Date");
+                        v_enddate.setVisibility(TextView.VISIBLE);
+                      //  System.out.println("stay");
+
+                        break;
+//                    case R.id.radio3:
+//                        RadioButton value = Integer.parseInt(((RadioButton) findViewById(R.id.radio3).getText()) * 3);
+//                        break;
+                }
+            }
+        });
         adh=(EditText) findViewById(R.id.adhaar);
         b=(Button) findViewById(R.id.bt_submitform);
         name=(EditText) findViewById(R.id.name);
@@ -87,30 +150,123 @@ TextView date;
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    visit.put("DOB",date.getText().toString());
-                    visit.put("name",name.getText().toString());
-                    visit.put("phone",phone.getText().toString());
-                    visit.put("email",email.getText().toString());
-                    visit.put("pan",pan.getText().toString());
-                    visit.put("street",street.getText().toString());
-                    visit.put("city",city.getText().toString());
-                    visit.put("zipcode",zip.getText().toString());
-                    visit.put("state",state.getSelectedItem().toString());
-                    visit.put("country",country.getText().toString());
-                    visit.put("occupation",occupation.getSelectedItem().toString());
-                    visit.put("Adhaar",adh.getText().toString());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                Map<String, String> postData = new HashMap<>();
-                postData.put("purpose", "demo");
-                postData.put("ver", "2.1");
-                postData.put("storeCode", "QUASUS00036");
-                HttpPostRequest Generate_id=new HttpPostRequest(postData);
-                String num=adh.getText().toString();
-                Generate_id.execute(num);
+
+                    if(name.getText().toString().isEmpty()){
+                        name.setError("This Field Required");
+                        showToast("Some fields are incomplete");
+                 }
+                    else if(date.getText().toString().length()==0){
+
+                        showToast("Select DOB");
+
+                    }
+
+                 else if(phone.getText().toString().isEmpty()){
+                      phone.setError("This Field Required");
+                      showToast("Some fields are incomplete");
+                    }
+                    else if(email.getText().toString().isEmpty()){
+                      email.setError("This Field Required");
+                        showToast("Some fields are incomplete");
+                    }
+                    else if(pan.getText().toString().isEmpty()){
+                        pan.setError("This Field Required");
+                        showToast("Some fields are incomplete");
+                    }
+                    else if(street.getText().toString().isEmpty()){
+                        street.setError("This Field Required");
+                        showToast("Some fields are incomplete");
+                    }
+                    else if(city.getText().toString().isEmpty()){
+                        city.setError("This Field Required");
+                        showToast("Some fields are incomplete");
+                    }
+                    else if(zip.getText().toString().isEmpty()){
+                        email.setError("This Field Required");
+                        showToast("Some fields are incomplete");
+                    }
+                    else if(country.getText().toString().isEmpty()){
+                        email.setError("This Field Required");
+                        showToast("Some fields are incomplete");
+                    }
+                    else if(email.getText().toString().isEmpty()){
+                        email.setError("This Field Required");
+                        showToast("Some fields are incomplete");
+                    }
+                    else if(adh.getText().toString().isEmpty()){
+                        email.setError("This Field Required");
+                        showToast("Some fields are incomplete");
+
+                    }
+                    else if(adh.getText().toString().length()!=12){
+
+                        showToast("Aadhar number is incorect");
+
+                    }
+
+                    else if(state.getSelectedItemPosition()==0) {
+                        showToast("Select State");
+                    }
+                    else if(occupation.getSelectedItemPosition()==0) {
+                        showToast("Select Occupation");
+                    }
+
+                    else if(!vtype&&!etype){
+
+                        showToast("Please Check the Type");
+
+                    }
+
+                    else {
+                        try {
+                                if(vtype) {
+                                if(v_date.getText().toString().length()==0){
+                                    showToast("Select Visit Date");
+
+                                }
+                            }
+                            else if(etype) {
+                                if(v_date.getText().toString().length()==0){
+                                    showToast("Select start Date");
+
+                                }
+                                if(v_enddate.getText().toString().length()==0){
+                                    showToast("Select End Date");
+
+                                }
+                            }
+
+
+                                    visit.put("DOB", date.getText().toString());
+                                    visit.put("name", name.getText().toString());
+                                    visit.put("phone", phone.getText().toString());
+                                    visit.put("email", email.getText().toString());
+                                    visit.put("pan", pan.getText().toString());
+                                    visit.put("street", street.getText().toString());
+                                    visit.put("city", city.getText().toString());
+                                    visit.put("zipcode", zip.getText().toString());
+                                    visit.put("state", state.getSelectedItem().toString());
+                                    visit.put("country", country.getText().toString());
+                                    visit.put("occupation", occupation.getSelectedItem().toString());
+                                    visit.put("Adhaar", adh.getText().toString());
+                                                            if(vtype)
+                                visit.put("visit_Date",v_date.getText().toString());
+                            if(etype)
+                                    visit.put("stay_duration", v_date.getText().toString() + "," + v_enddate.getText().toString());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Map<String, String> postData = new HashMap<>();
+                        postData.put("purpose", "demo");
+                        postData.put("ver", "2.1");
+                        postData.put("storeCode", "QUASUS00036");
+                        System.out.println(visit.toString());
+                        HttpPostRequest Generate_id = new HttpPostRequest(postData);
+                        String num = adh.getText().toString();
+                        Generate_id.execute(num);
+                    }
             }
         });
 
@@ -256,7 +412,9 @@ TextView date;
                 if (resultCode == RESULT_ERROR) {
                     JSONObject ki=new JSONObject();
                     String errorString = data.getStringExtra(KEY_ACTIVITY_RESULT);
+                    System.out.println("errr"+errorString);
                     try {
+
                         ki=new JSONObject(errorString);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -292,5 +450,8 @@ TextView date;
             }
 
         }
+    }
+    public void showToast(String message) {
+        Toast.makeText(farmvisiting.this, message, Toast.LENGTH_LONG).show();
     }
 }

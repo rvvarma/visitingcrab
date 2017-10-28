@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Select Type</string>
+    <!--  PreProduction => https://preprod.quagga.in/gateway/
+        Production => https://api.quagga.in/gateway/ -->
+    <string name="api_base_url">https://preprod.quagga.in/gateway/</string>
+
+    <!--  PreProduction => PP
+          Production => P   -->
+    <string name="sdk_env">PP</string>
     <string-array name="occupation">
         <item>Select Occupation</item>
         <item>Student</item>

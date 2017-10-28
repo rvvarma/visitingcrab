@@ -48,6 +48,7 @@
             android:textSize="15dp"
             android:id="@+id/phone_1"
             android:inputType="number"
+            android:maxLength="10"
             android:maxLines="1"
             android:singleLine="true"
             />
@@ -147,6 +148,43 @@
 
             style="@style/Base.Widget.AppCompat.Spinner.Underlined">
         </Spinner>
+
+        <RadioGroup
+            android:id="@+id/visit_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/visit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Visit"
+
+                />
+
+            <RadioButton
+                android:id="@+id/stay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stay"
+                android:layout_marginLeft="15dp"/>
+
+        </RadioGroup>
+        <TextView
+            android:id="@+id/v_visit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            />
+        <TextView
+            android:id="@+id/v_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            />
         <Button
             android:layout_width="match_parent"
             android:layout_height="40dp"

@@ -38,6 +38,7 @@ public class declaration extends AppCompatActivity {
     JSONObject jsonObj;
     String responceData;
     JSONObject dummy;
+    String resp;
     public static final String REQUEST_METHOD = "POST";
     public static final int READ_TIMEOUT = 30000;
     public static final int CONNECTION_TIMEOUT = 30000;
@@ -47,6 +48,7 @@ public class declaration extends AppCompatActivity {
         setContentView(R.layout.activity_declaration);
         Intent intent = getIntent();
         responceData= intent.getStringExtra("data");
+        resp= intent.getStringExtra("visit");
 
         submit=(Button) findViewById(R.id.bt_submitform1);
         c=(CheckBox)findViewById(R.id.accept);
@@ -57,6 +59,7 @@ public class declaration extends AppCompatActivity {
                 if(c.isChecked()){
 
                     try {
+                        dummy.put("profile",new JSONObject(resp));
                         jsonObj = new JSONObject(responceData);
                         JSONObject categoryObject = jsonObj.getJSONObject("e_Kyc");
                         JSONObject categoryObject1 = categoryObject.getJSONObject("Poi");
@@ -67,6 +70,12 @@ public class declaration extends AppCompatActivity {
                         DOB=categoryObject1.getString("Dob");
                         sex=categoryObject1.getString("Gender");
                         address=categoryObject2.getString("co")+","+categoryObject2.getString("house")+","+categoryObject2.getString("street")+","+categoryObject2.getString("loc")+","+categoryObject2.getString("vtc")+","+categoryObject2.getString("dist")+","+categoryObject2.getString("state")+","+categoryObject2.getString("pc")+","+categoryObject2.getString("po");
+                        dummy.put("photo",im);
+                        dummy.put("name",name);
+                        dummy.put("DOB",DOB);
+                        dummy.put("Sex",sex);
+                        dummy.put("address",address);
+
 
 
                         HttpPostRequest rt=new HttpPostRequest();
@@ -90,7 +99,7 @@ public class declaration extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params){
-            String stringUrl = "http://34.214.58.80:3001/setup";
+            String stringUrl = "http://34.214.58.80:3001/users/";
             String result = null;
             String inputLine;
             try {
@@ -179,10 +188,7 @@ public class declaration extends AppCompatActivity {
                     // Setting OK Button
                     alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            SharedPreferences preferences = getSharedPreferences("collect", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = preferences.edit();
-                            editor.clear();
-                            editor.commit();
+
 
                             Intent i=new Intent(declaration.this,farmvisiting.class);
                             startActivity(i);
